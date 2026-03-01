@@ -1,0 +1,33 @@
+server:
+  port: "8080"
+  read_timeout: 15
+  write_timeout: 15
+  idle_timeout: 60
+
+database:
+  main:
+    host: "localhost"
+    port: 3306
+    user: "main_user"
+    password: "main_password"
+    dbname: "main_project"
+    max_conns: 50
+    min_conns: 10
+  
+  local:
+    host: "localhost"
+    port: 3306
+    user: "local_user"
+    password: "local_password"
+    dbname: "user_sync"
+    max_conns: 50
+    min_conns: 10
+
+observability:
+  log_level: "info"
+  metrics_port: "9090"
+  tracing:
+    enabled: true
+    service_name: "user-sync-service"
+    environment: "production"
+    exporter_url: "http://jaeger:14268/api/traces"
