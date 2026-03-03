@@ -12,6 +12,8 @@ import (
 
     "go.uber.org/zap"
     "github.com/spf13/viper"
+    "github.com/jmoiron/sqlx"
+    "ma_user_sync_service/internal/infrastructure/persistence/mysql"
 )
 
 func initConfig() error {
@@ -95,6 +97,17 @@ func main() {
         IdleTimeout:  viper.GetDuration("server.idle_timeout") * time.Second,
     }
 
+    // 3.2 Initialize databases
+    miDB, maDB, err := initDatabases(logger)
+    if err != nil {
+        logger.Fatal("Failed to connect to databases", zap.Error(err))
+    }
+    defer miDB.Close()
+    defer maDB.Close()
+
+    logger.Info("Both databases connected successfully")
+    
+
     // 4. Start server in goroutine
     go func() {
         logger.Info("Server listening", zap.String("port", viper.GetString("server.port")))
@@ -117,4 +130,36 @@ func main() {
     }
 
     logger.Info("Server exited")
+}
+
+func initDatabases(logger *zap.Logger) (*sqlx.DB, *sqlx.DB, error) {
+    // MI Database (main users)
+    miDB, err := mysql.NewConnection(mysql.Config{
+        Host:     viper.GetString("database.mi.host"),
+        Port:     viper.GetInt("database.mi.port"),
+        User:     viper.GetString("database.mi.user"),
+        Password: viper.GetString("database.mi.password"),
+        DBName:   viper.GetString("database.mi.dbname"),
+        MaxConns: viper.GetInt("database.mi.max_conns"),
+        MinConns: viper.GetInt("database.mi.min_conns"),
+    }, logger.With(zap.String("db", "mi")))
+    if err != nil {
+        return nil, nil, fmt.Errorf("MI database: %w", err)
+    }
+    
+    // MA Database (local users)
+    maDB, err := mysql.NewConnection(mysql.Config{
+        Host:     viper.GetString("database.ma.host"),
+        Port:     viper.GetInt("database.ma.port"),
+        User:     viper.GetString("database.ma.user"),
+        Password: viper.GetString("database.ma.password"),
+        DBName:   viper.GetString("database.ma.dbname"),
+        MaxConns: viper.GetInt("database.ma.max_conns"),
+        MinConns: viper.GetInt("database.ma.min_conns"),
+    }, logger.With(zap.String("db", "ma")))
+    if err != nil {
+        return nil, nil, fmt.Errorf("MA database: %w", err)
+    }
+    
+    return miDB, maDB, nil
 }
