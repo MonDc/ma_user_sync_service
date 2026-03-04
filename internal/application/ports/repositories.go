@@ -2,7 +2,7 @@ package ports
 
 import (
     "context"
-    "github.com/yourusername/user-sync-service/internal/domain/user"
+    "github.com/mondc/ma_user_sync_service/internal/domain/user"
 )
 
 type UserRepository interface {

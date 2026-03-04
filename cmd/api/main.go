@@ -13,7 +13,7 @@ import (
     "go.uber.org/zap"
     "github.com/spf13/viper"
     "github.com/jmoiron/sqlx"
-    "ma_user_sync_service/internal/infrastructure/persistence/mysql"
+    "github.com/mondc/ma_user_sync_service/internal/infrastructure/persistence/mysql"
 )
 
 func initConfig() error {

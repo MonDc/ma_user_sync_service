@@ -6,8 +6,8 @@ import (
     "fmt"
     
     "github.com/jmoiron/sqlx"
-    "github.com/yourusername/user-sync-service/internal/domain/user"
-    "github.com/yourusername/user-sync-service/internal/domain/errors"
+    "github.com/mondc/ma_user_sync_service/internal/domain/user"
+    "github.com/mondc/ma_user_sync_service/internal/domain/errors"
     "go.uber.org/zap"
 )
 

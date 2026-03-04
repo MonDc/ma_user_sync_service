@@ -1,4 +1,4 @@
-module github.com/mondc/ma_user-sync-service
+module github.com/mondc/ma_user_sync_service
 
 go 1.25.0
 

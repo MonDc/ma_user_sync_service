@@ -5,12 +5,12 @@ import (
     "net/http"
     
     "github.com/gorilla/mux"
-    "github.com/yourusername/user-sync-service/internal/application/commands"
-    "github.com/yourusername/user-sync-service/internal/application/queries"
-    "github.com/yourusername/user-sync-service/internal/domain/errors"
-    "github.com/yourusername/user-sync-service/internal/infrastructure/observability/logger"
-    "github.com/yourusername/user-sync-service/internal/infrastructure/observability/metrics"
-    "github.com/yourusername/user-sync-service/internal/infrastructure/observability/tracing"
+    "github.com/mondc/ma_user_sync_service/internal/application/commands"
+    "github.com/mondc/ma_user_sync_service/internal/application/queries"
+    "github.com/mondc/ma_user_sync_service/internal/domain/errors"
+    "github.com/mondc/ma_user_sync_service/internal/infrastructure/observability/logger"
+    "github.com/mondc/ma_user_sync_service/internal/infrastructure/observability/metrics"
+    "github.com/mondc/ma_user_sync_service/internal/infrastructure/observability/tracing"
     "go.uber.org/zap"
 )
 
@@ -149,7 +149,7 @@ func (h *UserHandler) GetUser(w http.ResponseWriter, r *http.Request) {
 func (h *UserHandler) HealthCheck(w http.ResponseWriter, r *http.Request) {
     h.respondWithJSON(w, http.StatusOK, map[string]string{
         "status": "healthy",
-        "service": "user-sync-service",
+        "service": "ma_user_sync_service",
     })
 }
 

@@ -56,5 +56,5 @@ func InitTracer(serviceName, environment, exporterURL string) (func(), error) {
 }
 
 func StartSpan(ctx context.Context, name string) (context.Context, trace.Span) {
-    return otel.Tracer("user-sync-service").Start(ctx, name)
+    return otel.Tracer("ma_user_sync_service").Start(ctx, name)
 }

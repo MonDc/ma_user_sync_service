@@ -1,7 +1,7 @@
 .PHONY: build run test docker-up docker-down migrate
 
 build:
-	go build -o bin/user-sync-service ./cmd/api
+	go build -o bin/ma_user_sync_service ./cmd/api
 
 run:
 	go run ./cmd/api

@@ -7,8 +7,8 @@ import (
     
     "github.com/jmoiron/sqlx"
     _ "github.com/go-sql-driver/mysql"
-    "github.com/yourusername/user-sync-service/internal/domain/user"
-    "github.com/yourusername/user-sync-service/internal/domain/errors"
+    "github.com/mondc/ma_user_sync_service/internal/domain/user"
+    "github.com/mondc/ma_user_sync_service/internal/domain/errors"
     "go.uber.org/zap"
 )
 

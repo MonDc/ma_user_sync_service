@@ -2,8 +2,8 @@ package queries
 
 import (
     "context"
-    "github.com/yourusername/user-sync-service/internal/domain/user"
-    "github.com/yourusername/user-sync-service/internal/application/ports"
+    "github.com/mondc/ma_user_sync_service/internal/domain/user"
+    "github.com/mondc/ma_user_sync_service/internal/application/ports"
 )
 
 type GetUserQuery struct {

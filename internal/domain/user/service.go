@@ -3,7 +3,7 @@ package user
 import (
     "context"
     "time"
-    "github.com/yourusername/user-sync-service/internal/domain/errors"
+    "github.com/mondc/ma_user_sync_service/internal/domain/errors"
 )
 
 type Service interface {
