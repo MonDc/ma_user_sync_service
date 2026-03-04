@@ -2,7 +2,6 @@ package user
 
 import (
     "context"
-    "github.com/mondc/ma_user_sync_service/internal/domain/errors"
 )
 
 type Repository interface {
