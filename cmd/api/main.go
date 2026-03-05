@@ -14,27 +14,35 @@ import (
     "github.com/spf13/viper"
     "github.com/jmoiron/sqlx"
     "github.com/mondc/ma_user_sync_service/internal/infrastructure/persistence/mysql"
+    "github.com/joho/godotenv"
 )
 
 func initConfig() error {
+    // Load .env file first (if exists)
+    if err := godotenv.Load("config/.env"); err != nil {
+        log.Printf("Warning: .env file not found: %v", err)
+    }
+    
     viper.SetConfigName("config")
     viper.SetConfigType("yaml")
     viper.AddConfigPath("./config")
     viper.AddConfigPath(".")
+
+    // Enable environment variable substitution
     viper.AutomaticEnv()
 
-    // Default values
-    viper.SetDefault("server.port", "8080")
-    viper.SetDefault("server.read_timeout", 15)
-    viper.SetDefault("server.write_timeout", 15)
-    viper.SetDefault("server.idle_timeout", 60)
-    viper.SetDefault("log.level", "info")
-
+    // Read config file
     if err := viper.ReadInConfig(); err != nil {
-        // It's okay if config file doesn't exist, we use defaults
-        log.Printf("No config file found, using defaults: %v", err)
+        return fmt.Errorf("failed to read config: %w", err)
     }
+    // Default values
+    // viper.SetDefault("server.port", "8080")
+    // viper.SetDefault("server.read_timeout", 15)
+    // viper.SetDefault("server.write_timeout", 15)
+    // viper.SetDefault("server.idle_timeout", 60)
+    // viper.SetDefault("log.level", "info")
 
+    log.Printf("Config loaded from: %s", viper.ConfigFileUsed())
     return nil
 }
 
