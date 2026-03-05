@@ -9,19 +9,19 @@ log:
 
 database:
   mi:
-    host: "192.168.x.x"  # MI database IP
+    host: "${MI_DB_HOST}"      # Placeholder
     port: 3306
-    user: "ma_service"
-    password: "your_password"
+    user: "${MI_DB_USER}"       # From .env
+    password: "${MI_DB_PASS}"   # From .env
     dbname: "mi_db"
     max_conns: 25
     min_conns: 5
   
   ma:
-    host: "192.168.x.x"  # MA database IP
+    host: "${MA_DB_HOST}"
     port: 3306
-    user: "ma_service"
-    password: "your_password" 
+    user: "${MA_DB_USER}"
+    password: "${MA_DB_PASS}"
     dbname: "ma_db"
     max_conns: 25
     min_conns: 5
