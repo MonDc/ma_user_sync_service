@@ -9,19 +9,19 @@ log:
 
 database:
   mi:
-    host: "${SQL_SERVER_22}"    #  CENTRAL22 is a db server for all services now. In the future, we can separate them, to prevent single point of failure.
+    host: ""    ## Will come from SQL_SERVER_22 env var # CENTRAL22 is a db server for all services now. In the future, we can separate them, to prevent single point of failure.
     port: 3306
-    user: "${SQL_SERVER_22_DB_USER}"       # From .env
-    password: "${SQL_SERVER_22_DB_PASS}"   # From .env
-    dbname: "${MI}"
+    user: ""       # From .env
+    password: ""   # From .env
+    dbname: ""
     max_conns: 25
     min_conns: 5
   
   ma:
-    host: "${SQL_SERVER_22}"    # Use the same DB server for both services
+    host: ""    # Use the same DB server for both services
     port: 3306
-    user: "${SQL_SERVER_22_DB_USER}"
-    password: "${SQL_SERVER_22_DB_PASS}"
-    dbname: "${MA}"
+    user: ""       # From .env
+    password: ""   # From .env
+    dbname: ""
     max_conns: 25
     min_conns: 5
