@@ -1,6 +1,9 @@
 package user
 
 import (
+	"database/sql/driver"
+	"encoding/json"
+	"fmt"
 	"time"
 
 	"github.com/mondc/ma_user_sync_service/internal/domain/errors"
@@ -30,6 +33,27 @@ const (
 )
 
 type JSON map[string]interface{}
+
+// Scan implements the sql.Scanner interface to handle NULL values from the DB
+func (j *JSON) Scan(value interface{}) error {
+	if value == nil {
+		*j = nil
+		return nil
+	}
+	b, ok := value.([]byte)
+	if !ok {
+		return fmt.Errorf("type assertion to []byte failed")
+	}
+	return json.Unmarshal(b, j)
+}
+
+// Value implements the driver.Valuer interface for writing to the DB
+func (j JSON) Value() (driver.Value, error) {
+	if j == nil {
+		return nil, nil
+	}
+	return json.Marshal(j)
+}
 
 // Domain business rules
 func (u *User) Validate() error {
